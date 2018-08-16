@@ -7,5 +7,5 @@ const get = url => fetch(url)
   .then(r => r.ok ? r.json() : r.json().then(throwJson));
 
 export function getSector(sector) {
-  return get(SECTOR_URL + sector).then(res => console.log(res));
+  return get(SECTOR_URL + sector).then(res => res);
 }
