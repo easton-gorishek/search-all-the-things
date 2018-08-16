@@ -15,7 +15,7 @@ export default class Search extends Component {
   };
 
   static propTypes = {
-    onSearch: PropTypes.func.isRequired
+    onSearch: PropTypes.func.isRequired,
   };
 
   handleSectorSelect = (search) => {
@@ -28,7 +28,7 @@ export default class Search extends Component {
   };
 
   render() {
-    const { sectors } = this.state;
+    const { sectors, search } = this.state;
 
     return (
       <form className="search-form" onSubmit={event => this.handleSubmit(event)}>
@@ -38,7 +38,7 @@ export default class Search extends Component {
             <option key={sector} value={sector}>{sector}</option>
           ))}
         </select>
-        <button>Search</button>
+        <button disabled={!search}>Search</button>
       </form>
     );
   }

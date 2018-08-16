@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
 import Search from './Search';
-// import Sector from './sector/Sector';
+import Companies from './companies/Companies';
 import { getSector } from '../services/stocksApi';
 
 class App extends Component {
 
   state = {
+    sector: 'Select a Sector',
     companies: []
   };
 
   handleSearch = (sector) => {
-    getSector(sector)
-      .then(companies => this.setState({ companies }));
+    this.setState({ sector }, () => {
+      getSector(this.state.sector)
+        .then(companies => this.setState({ companies }));
+    });
   };
 
   render() {
+    const { sector, companies } = this.state;
 
     return (
       <main>
-        <h1>REACT TIME</h1>
-        <Search onSearch={this.handleSearch}/>
-      
+        <h1>{sector}</h1>
+        <Search onSearch={this.handleSearch} onSelect/>
+        <Companies companies={companies}/>
       </main>
     );
   }
