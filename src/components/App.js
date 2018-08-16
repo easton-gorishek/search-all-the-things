@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from './Search';
 import Companies from './companies/Companies';
+import Paging from './Paging';
 import { getSector } from '../services/stocksApi';
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
       <main>
         <h1>{sector}</h1>
         <Search onSearch={this.handleSearch} onSelect/>
+        <Paging companies={companies}/>
         <Companies companies={companies}/>
       </main>
     );
