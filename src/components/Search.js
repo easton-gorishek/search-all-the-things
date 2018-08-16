@@ -1,43 +1,42 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Search extends Component {
 
   state = {
-    search: 'Select a Sector'
+    search: '',
+    sectors: [
+      'Technology',
+      'Industrials',
+      'Health Care',
+      'Energy',
+      'Financials'
+    ]
   };
 
-  sectorOptions = [
-    'Technology',
-    'Industrials',
-    'Health Care',
-    'Energy',
-    'Financials'
-  ];
-
-  createSelectOptions() {
-    let options = [];
-    for(let i = 0; i < this.sectorOptions.length; i++) {
-      options.push(<option key={i} value={this.sectorOptions[i]}>{this.sectorOptions[i]}</option>);
-    }
-    return options;
-  }
-
-  handleChange = ({ target }) => {
-    this.setState({ search: target.value });
+  static propTypes = {
+    onSearch: PropTypes.func.isRequired
   };
 
-  // handleSubmit = event => {
-  //   event.preventDefault();
-  //   this.props.onSearch(this.state);
-  // };
+  handleSectorSelect = (search) => {
+    this.setState({ search });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.onSearch(this.state.search);
+  };
 
   render() {
-    const { search } = this.state;
+    const { sectors } = this.state;
 
     return (
-      <form className="search-form">
-        <select value={search} onChange={this.handleChange}>
-          {this.createSelectOptions()}
+      <form className="search-form" onSubmit={event => this.handleSubmit(event)}>
+        <select onChange={({ target }) => this.handleSectorSelect(target.value)}>
+          <option value="">Select a sector</option>
+          {sectors.map(sector => (
+            <option key={sector} value={sector}>{sector}</option>
+          ))}
         </select>
         <button>Search</button>
       </form>
