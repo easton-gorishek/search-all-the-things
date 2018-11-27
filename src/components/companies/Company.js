@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import styles from './Company.css';
 
-export default class Company extends Component {
+export default class Companies extends Component {
 
   static propTypes = {
     company: PropTypes.object.isRequired
   };
 
   render() {
+
     const { company } = this.props;
-    const { 
-      companyName, 
-      symbol, 
-      latestPrice,
-      latestVolume, 
-      week52High,
-      week52Low,
-      marketCap } = company;
+    const { symbol, companyName, week52High, week52Low } = company;
+    const { ytdChange, latestPrice } = company;
 
     return (
-      <li>
-        <h2>{companyName} ({symbol})</h2>
-        <p>Latest price: {latestPrice}</p>
-        <p>Latest volume: {latestVolume}</p>
-        <p>52 week high: {week52High}</p>
-        <p>52 week high: {week52Low}</p>
-        <p>Market cap: {marketCap}</p>
+      <li className={styles.company}>
+        <Link to={`/companies/${symbol}`}>
+          <h3>{companyName} ({symbol})</h3><br/>
+        </Link>
+        Latest Price: {latestPrice}<br/>
+        52-Week High: {week52High}<br/>
+        52-Week Low: {week52Low}<br/>
+        YTD Change: {ytdChange}<br/><br/>
       </li>
     );
   }
+
 }

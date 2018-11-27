@@ -1,30 +1,31 @@
 /* eslint-env node */
-
 const { resolve } = require('path');
 const CleanPlugin = require('clean-webpack-plugin');
-const HTMLPlugin = require('html-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
+
 const buildDir = 'docs';
 const path = resolve(__dirname, buildDir);
 
 module.exports = {
   // start here
   entry: './src/index.js',
-  // put the build output here (not dev server)
+  // put the build output here (not the dev server)
   output: {
     path,
     filename: 'bundle.[hash].js',
-    publicPath: ''
+    publicPath: '/'
   },
-  // mode (will eventually be cmd line arg in package.json scripts)
+  // mode (will eventually be cmd line arg in package.json)
   mode: 'development',
-  devtool: 'inline-source-map', 
+  devtool: 'inline-source-map',
   devServer: {
-    contentBase: `./${buildDir}`
+    contentBase: `./${buildDir}`,
+    historyApiFallback: true
   },
   plugins: [
     // add plugins
     new CleanPlugin(`${path}/bundle.*.js`),
-    new HTMLPlugin({ template: './src/index.html' })
+    new HtmlPlugin({ template: './src/index.html' })
   ],
   module: {
     rules: [
@@ -35,18 +36,6 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              ['env', {
-                targets: {
-                  browsers: 'Chrome 65'
-                },
-              }],
-              'react'
-            ],
-            plugins: [
-              require('babel-plugin-transform-object-rest-spread'),
-              require('babel-plugin-transform-class-properties')
-            ],
             cacheDirectory: true
           }
         }
@@ -72,6 +61,15 @@ module.exports = {
             options: { sourceMap: true }
           }
         ]
+      },
+
+      // images
+      {
+        test: /\.(jpg|png|svg|)$/,
+        use: {
+          loader: 'url-loader',
+          options: { limit: 500 },
+        }
       }
     ]
   }
