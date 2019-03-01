@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getFavorites } from '../../services/favoritesApi';
-import Favorite from './Favorite';
+import Favorite from './Favorite.js';
 import styles from './Favorites.css';
 
 export default class componentName extends Component {

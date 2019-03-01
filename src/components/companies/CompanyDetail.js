@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { getStockData } from '../../services/iextradingAPI';
 import { removeFavorite, addFavorite, getFavorite } from '../../services/favoritesApi';
 import styles from './CompanyDetail.css';
-import News from './News';
-import LineChart from './LineChart';
+import News from './News.js';
+import LineChart from './LineChart.js';
 
 export default class CompanyDetail extends Component {
 

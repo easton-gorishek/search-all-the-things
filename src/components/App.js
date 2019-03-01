@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import Results from './companies/Results';
-import Home from './home/Home';
-import CompanyDetail from './companies/CompanyDetail';
-import Favorites from './favorites/Favorites';
+import Results from './companies/Results.js';
+import Home from './home/Home.js';
+import CompanyDetail from './companies/CompanyDetail.js';
+import Favorites from './favorites/Favorites.js';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import styles from './App.css';
 

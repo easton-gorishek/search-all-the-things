@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Companies from './companies';
+import Companies from './Companies.js';
 import qs from 'query-string';
 import PropTypes from 'prop-types';
-import Paging from '../paging/Paging';
+import Paging from '../paging/Paging.js';
 import { getSectorData } from '../../services/iextradingAPI';
 
 export default class Results extends Component {
